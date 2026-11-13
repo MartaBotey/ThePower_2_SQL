@@ -71,7 +71,7 @@ select p.amount as amount_antepenultimo
 from rental r 
 join payment p 
 	on r.rental_id = p.rental_id
-order by r.rental_id desc
+order by r.rental_date desc, r.rental_id desc
 limit 1 offset 2 ;
 
 -- 12. Encuentra el título de las películas en la tabla “filmˮ que no sean ni ‘NC-17ʼ ni ‘Gʼ en cuanto a su clasificación.
@@ -142,6 +142,7 @@ having AVG(f.length ) > 110;
 -- 21.  ¿Cuál es la media de duración del alquiler de las películas?
 select AVG (f.rental_duration) as media_duracion_alquiler
 from film f ;
+	-- Uso la duración prevista del alquiler. La duración real se calcula con `return_date - rental_date` sobre los alquileres devueltos.
 
 -- 22. Crea una columna con el nombre y apellidos de todos los actores y actrices.
 select concat(a.first_name ,' ', a.last_name ) as nombre_actor
